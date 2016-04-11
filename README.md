@@ -18,7 +18,7 @@ Examples
 Create an instance of the Codelocks class with your API key and pairing ID
 
 ```php
-$codelocks = new \drinkynet\Codelocks($key, $pid);
+$codelocks = new \drinkynet\Codelocks\Codelocks($key, $pid);
 
 $netcode = $codelocks->netcode();
 ```
