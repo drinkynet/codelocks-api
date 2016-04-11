@@ -1,0 +1,7 @@
+# Don't include these files in an archive
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.env export-ignore
+/.env.example export-ignore
+/phpunit.xml export-ignore

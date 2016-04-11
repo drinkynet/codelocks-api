@@ -1,0 +1,15 @@
+.env
+composer.lock
+/vendor
+
+#
+# Local editor config
+#
+*.sublime-project
+*.sublime-workspace
+
+#
+# Local testy bits
+#
+test.sh
+index.php
