@@ -15,26 +15,58 @@ composer require drinkynet/codelocks-api
 Examples
 --------
 
-Create an instance of the Codelocks class with your API key and pairing ID
+Create an instance of the Codelocks class with your API key and default Access Key
 
 ```php
-$codelocks = new \drinkynet\Codelocks\Codelocks($key, $pid);
+$codelocks = new \drinkynet\Codelocks\Codelocks($key, $accessKey);
 
 $netcode = $codelocks->netcode();
 ```
 
-Get a netcode for lock `N000001` that is valid now:
+Get a netcode for lock `0000000000000000000000000000001a` that is valid now:
 
 ```php
-$netcode->lock('N000001')->get();
+$netcode->lock('0000000000000000000000000000001a')->get();
 ```
 
-Get a netcode for lock `N000000` that is valid in the future:
+Get a netcode for lock `0000000000000000000000000000001a` that is valid in the future:
 
 ```php
-$code = $netcode->lock('N000000')
+$code = $netcode->lock('0000000000000000000000000000001a')
     ->date(new \DateTime('2016-09-23'))
     ->hour(9)
     ->duration(1)
     ->get();
+```
+
+Note: You can get the lock ID for each lock from the lock list returned by the ```->lock()``` method call
+
+
+Get an initialisation sequence for a lock model
+
+```php
+$codelocks = new \drinkynet\Codelocks\Codelocks($key, $accessKey);
+
+// Init sequence data with default master code
+$init = $codelocks->init()
+    ->lockModel('K3CONNECT')
+    ->get();
+
+// Init sequence data with custom master code
+$init = $codelocks->init()
+    ->lockModel('K3CONNECT')
+    ->masterCode('12345678')
+    ->get();
+```
+
+Get a list of locks associated with the API credentials
+
+```php
+$codelocks = new \drinkynet\Codelocks\Codelocks($key, $accessKey);
+
+// Uses the accessKey set earlier
+$locks = $codelocks->lock()->get();
+
+// Use a different accessKey associated with the API key
+$locks $codelocks->lock('abcde12345')->get();
 ```

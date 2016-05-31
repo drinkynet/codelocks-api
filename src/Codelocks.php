@@ -2,6 +2,8 @@
 
 namespace drinkynet\Codelocks;
 
+use drinkynet\Codelocks\Methods as Methods;
+
 class Codelocks
 {
     /**
@@ -12,18 +14,16 @@ class Codelocks
     private $key;
 
     /**
-     * Store the pairing ID used to authenticate against the API
-     *
-     * @var string
+     * Store the access key used for some methods
      */
-    private $pid;
+    private $accessKey;
 
     /**
      * Store the path to the API
      *
      * @var string
      */
-    private $endpoint = 'https://api-2445581366752.apicast.io/api/v3';
+    private $endpoint = 'https://5qpe04f0od.execute-api.eu-west-1.amazonaws.com/prod';
 
     /**
      * Validate the server certificate
@@ -55,22 +55,24 @@ class Codelocks
 
     /**
      * @param string $key The API key to use
-     * @param string $pid The pairing ID to use
+     * @param string $accessKey The pairing ID to use
      */
-    public function __construct($key, $pid)
+    public function __construct($key, $accessKey)
     {
-        // Check that the API key is of the right form
-        if (!preg_match('/^[0-9a-f]{32}$/', $key)) {
+        // Check that the API key is of the right form and at least 40
+        // characters
+        if (!preg_match('/^[0-9a-zA-Z]{40,}$/', $key)) {
             throw new \Exception('Invalid API key');
         }
 
-        // Check that the Paring ID is of the right form
-        if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $pid)) {
-            throw new \Exception('Invalid Paring ID');
+        // Check that the accessKey is of the right form and at least 10
+        // characters
+        if (!preg_match('/^[0-9a-z]{10,}$/', $accessKey)) {
+            throw new \Exception('Invalid API access key');
         }
 
         $this->key = $key;
-        $this->pid = $pid;
+        $this->accessKey = $accessKey;
     }
 
     /**
@@ -107,10 +109,14 @@ class Codelocks
 
         $ch = curl_init();
 
+        // Generate the auth header from the API key
+        $authHeader = 'x-api-key: ' . $this->key;
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Accept: application/vnd.api+json',
             'Content-Type: application/vnd.api+json',
+            $authHeader
         ));
         curl_setopt($ch, CURLOPT_USERAGENT, 'Drinkynet/Codelocks-API/1.0 (github.com/drinkynet/codelocks-api)');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->verifySSL);
@@ -118,11 +124,6 @@ class Codelocks
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($ch, CURLOPT_ENCODING, '');
-
-        // user_key and pid are passed in args rather than headers so we add
-        // them in here
-        $args['user_key'] = $this->key;
-        $args['pid'] = $this->pid;
 
         switch ($verb) {
             case 'GET':
@@ -213,21 +214,6 @@ class Codelocks
     }
 
     /**
-     * Create a new netcode object
-     *
-     * Allows the creation of netcode objects for different locks from one
-     * instance of codelocks
-     *
-     * @param  string $lockId An optional lock ID (this can be set later)
-     * @return Netcode        An instance of a Netcode object with the API
-     *                        already injected
-     */
-    public function netcode($lockId = null)
-    {
-        return new Netcode($this, $lockId);
-    }
-
-    /**
      * Get information about the last request
      * @return array
      */
@@ -252,5 +238,59 @@ class Codelocks
     public function getLastError()
     {
         return $this->lastError;
+    }
+
+    /**
+     * API Method calls
+     */
+
+    /**
+     * Create a new init method object
+     *
+     * Returns the initialisation information for a lock model
+     *
+     * @return Methods\Init An instance of an Init object wiht the API
+     *                      already injected
+     */
+    public function init()
+    {
+        return new Methods\Init($this);
+    }
+
+    /**
+     * Create  a new lock method object
+     *
+     * Returns a list of locks for this set of API credentials and access key
+     *
+     * @param  string $accessKey An optional access key associated with this API
+     *                           key (can be set later)
+     * @return Methods\Lock      An instance of a lock object with the API
+     *                           already injected
+     */
+    public function lock($accessKey = null)
+    {
+        $accessKey = is_null($accessKey) ? $this->accessKey : $accesskey;
+        return new Methods\Lock($this, $this->accessKey);
+    }
+
+    /**
+     * Create a new netcode object
+     *
+     * Allows the creation of netcode objects for different locks from one
+     * instance of codelocks
+     *
+     * @param  string $lockId    An optional lock ID (this can be set later)
+     * @param  string $accessKey An optional access key associated with this API
+     *                           key (can be set later)
+     * @return Netcode        An instance of a Netcode object with the API
+     *                        already injected
+     */
+    public function netcode($lockId = null)
+    {
+        $netcode = new Methods\Netcode($this, $lockId);
+        if (isset($this->accessKey)) {
+            $netcode->accessKey($this->accessKey);
+        }
+        return $netcode;
     }
 }
