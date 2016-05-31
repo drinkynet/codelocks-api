@@ -163,7 +163,7 @@ class Netcode extends ApiMethod
      * Convert a time in hours to a codelocks duration ID
      *
      * @param  integer $duration A duration in hours
-     * @return $this             Allow method chianing
+     * @return $this             Allow method chaining
      */
     public function duration($d)
     {
