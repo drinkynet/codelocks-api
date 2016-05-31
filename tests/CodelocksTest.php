@@ -22,13 +22,13 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
     public function testBadAPIKey()
     {
         $this->setExpectedException('\Exception');
-        $codelocks = new Codelocks('012abc456', '00000000-0000-0000-0000-000000000000');
+        $codelocks = new Codelocks('a-1', 'aaaaaaaaa0');
     }
 
-    public function testBadPID()
+    public function testBadAccessKey()
     {
         $this->setExpectedException('\Exception');
-        $codelocks = new Codelocks('00000000000000000000000000000000', '0123abc456');
+        $codelocks = new Codelocks('0000000000000000000000000000000000000000', '--');
     }
 
     /**
@@ -37,17 +37,17 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
     public function testInstantiation()
     {
         $key = getenv('CODELOCKS_API_KEY');
-        $pid = getenv('CODELOCKS_API_PAIRING_ID');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
 
         if (!$key) {
             $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
         }
 
-        if (!$pid) {
-            $this->markTestSkipped('No CODELOCKS_API_PAIRING_ID in ENV');
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
         }
 
-        $codelocks = new Codelocks($key, $pid);
+        $codelocks = new Codelocks($key, $accessKey);
         $this->assertInstanceOf('\drinkynet\Codelocks\Codelocks', $codelocks);
     }
 
@@ -57,20 +57,60 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
     public function testNetcodeInstantiation()
     {
         $key = getenv('CODELOCKS_API_KEY');
-        $pid = getenv('CODELOCKS_API_PAIRING_ID');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
 
         if (!$key) {
             $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
         }
 
-        if (!$pid) {
-            $this->markTestSkipped('No CODELOCKS_API_PAIRING_ID in ENV');
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
         }
 
-        $codelocks = new Codelocks($key, $pid);
+        $codelocks = new Codelocks($key, $accessKey);
 
         $netcode = $codelocks->netcode();
 
-        $this->assertInstanceOf('\drinkynet\Codelocks\Netcode', $netcode);
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Netcode', $netcode);
+    }
+
+    public function testInitInstantiation()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $init = $codelocks->init();
+
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Init', $init);
+    }
+
+    public function testLockInstantiation()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $lock = $codelocks->lock();
+
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Lock', $lock);
     }
 }

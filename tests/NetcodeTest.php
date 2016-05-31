@@ -25,22 +25,22 @@ class NetcodeTest extends \PHPUnit_Framework_TestCase
     public function testGetNetcodeFromAPI()
     {
         $key = getenv('CODELOCKS_API_KEY');
-        $pid = getenv('CODELOCKS_API_PAIRING_ID');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
         $lock = getenv('CODELOCKS_TEST_LOCK_ID');
 
         if (!$key) {
             $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
         }
 
-        if (!$pid) {
-            $this->markTestSkipped('No CODELOCKS_API_PAIRING_ID in ENV');
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
         }
 
         if (!$lock) {
             $this->markTestSkipped('No CODELOCKS_TEST_LOCK_ID in ENV');
         }
 
-        $codelocks = new Codelocks($key, $pid);
+        $codelocks = new Codelocks($key, $accessKey);
 
         // Get a netcode valid now for the specified lock
         $code = $codelocks->netcode($lock)->get();
