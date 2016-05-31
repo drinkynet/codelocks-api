@@ -70,3 +70,8 @@ $locks = $codelocks->lock()->get();
 // Use a different accessKey associated with the API key
 $locks $codelocks->lock('abcde12345')->get();
 ```
+
+Previous version
+----------------
+
+If you are using the version 3 API install the 1.0.1 version of this wrapper via composer.
