@@ -1,7 +1,7 @@
 Codelocks API
 =============
 
-Lightweight PHP wrapper for the Codelocks Netcode API version 3.
+Lightweight PHP wrapper for the Codelocks Netcode API version 4.
 
 Installing
 ----------
@@ -29,7 +29,7 @@ Get a netcode for lock `0000000000000000000000000000001a` that is valid now:
 $netcode->lock('0000000000000000000000000000001a')->get();
 ```
 
-Get a netcode for lock `0000000000000000000000000000001a` that is valid in the future:
+Get a netcode for lock `0000000000000000000000000000001a` that is valid for a specific time and date:
 
 ```php
 $code = $netcode->lock('0000000000000000000000000000001a')
@@ -42,7 +42,7 @@ $code = $netcode->lock('0000000000000000000000000000001a')
 Note: You can get the lock ID for each lock from the lock list returned by the ```->lock()``` method call
 
 
-Get an initialisation sequence for a lock model
+Get an initialisation sequence for a lock model:
 
 ```php
 $codelocks = new \drinkynet\Codelocks\Codelocks($key, $accessKey);
@@ -59,7 +59,7 @@ $init = $codelocks->init()
     ->get();
 ```
 
-Get a list of locks associated with the API credentials
+Get a list of locks associated with the API credentials:
 
 ```php
 $codelocks = new \drinkynet\Codelocks\Codelocks($key, $accessKey);
