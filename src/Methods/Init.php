@@ -47,7 +47,7 @@ class Init extends ApiMethod
      */
     public function masterCode($masterCode)
     {
-        $this->args['mastercode'] = $mastercode;
+        $this->args['mastercode'] = $masterCode;
         return $this;
     }
 }

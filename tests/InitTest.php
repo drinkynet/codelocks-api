@@ -51,4 +51,33 @@ class InitTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('TimeCode', $init);
 
     }
+
+    public function testGetInitSequenceWithMasterCode()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+        $lock = getenv('CODELOCKS_TEST_LOCK_ID');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        if (!$lock) {
+            $this->markTestSkipped('No CODELOCKS_TEST_LOCK_ID in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $init = $codelocks->init()->lockModel('KL1550')->masterCode('12345678')->get();
+
+        $this->assertArrayHasKey('DefaultMastercode', $init);
+        $this->assertArrayHasKey('InitSeqFormat', $init);
+        $this->assertArrayHasKey('InitSeqFormatDesc', $init);
+        $this->assertArrayHasKey('InitSeq', $init);
+        $this->assertArrayHasKey('TimeCode', $init);
+    }
 }
