@@ -67,7 +67,7 @@ class Codelocks
 
         // Check that the accessKey is of the right form and at least 10
         // characters
-        if (!preg_match('/^[0-9a-z]{10,}$/', $accessKey)) {
+        if (!preg_match('/^[0-9a-z]{10,}$/', $accessKey) && !preg_match('/^[0-9]{6,}$/', $accessKey) && !is_null($accessKey)) {
             throw new \Exception('Invalid API access key');
         }
 
@@ -292,5 +292,23 @@ class Codelocks
             $netcode->accessKey($this->accessKey);
         }
         return $netcode;
+    }
+    
+    /**
+     * Return a list of durations
+     *
+     * Returns a list of durations or modes of operation for a given
+     * lock model.
+     *
+     * @param string $query     Lock model
+     * @param string $operation Specify DURATIONS to return all available
+     *                          durations for the given lock model or MODES
+     *                          to return all available NetCode modes for 
+     *                          the given lock model.
+     * @return Durations        A list lock durations.
+     */
+    public function durations()
+    {
+        return new Methods\Durations($this);
     }
 }
