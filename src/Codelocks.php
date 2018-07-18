@@ -23,7 +23,7 @@ class Codelocks
      *
      * @var string
      */
-    private $endpoint = 'https://5qpe04f0od.execute-api.eu-west-1.amazonaws.com/prod';
+    private $endpoint = 'https://api-eu.codelocks.io/v5';
 
     /**
      * Validate the server certificate
@@ -245,6 +245,26 @@ class Codelocks
      */
 
     /**
+     * Create a new duration method object
+     *
+     * @return Methods\Duration
+     */
+    public function duration()
+    {
+        return new Methods\Duration($this);
+    }
+
+    /**
+     * Create a new durations method object
+     *
+     * @return Methods\Durations
+     */
+    public function durations()
+    {
+        return new Methods\Durations($this);
+    }
+
+    /**
      * Create a new init method object
      *
      * Returns the initialisation information for a lock model
@@ -258,19 +278,19 @@ class Codelocks
     }
 
     /**
-     * Create  a new lock method object
+     * Create  a new K3connect method object
      *
      * Returns a list of locks for this set of API credentials and access key
      *
      * @param  string $accessKey An optional access key associated with this API
      *                           key (can be set later)
-     * @return Methods\Lock      An instance of a lock object with the API
+     * @return Methods\K3connect An instance of a lock object with the API
      *                           already injected
      */
-    public function lock($accessKey = null)
+    public function k3connect($accessKey = null)
     {
         $accessKey = is_null($accessKey) ? $this->accessKey : $accesskey;
-        return new Methods\Lock($this, $this->accessKey);
+        return new Methods\K3connect($this, $this->accessKey);
     }
 
     /**
@@ -292,5 +312,24 @@ class Codelocks
             $netcode->accessKey($this->accessKey);
         }
         return $netcode;
+    }
+
+    /**
+     * @deprecated 5.0 Use the k3connect method instead. This method is
+     * maintained for backwards compatability
+     *
+     * Create  a new lock method object
+     *
+     * Returns a list of locks for this set of API credentials and access key
+     *
+     * @param  string $accessKey An optional access key associated with this API
+     *                           key (can be set later)
+     * @return Methods\Lock      An instance of a lock object with the API
+     *                           already injected
+     */
+    public function lock($accessKey = null)
+    {
+        $accessKey = is_null($accessKey) ? $this->accessKey : $accesskey;
+        return new Methods\Lock($this, $this->accessKey);
     }
 }

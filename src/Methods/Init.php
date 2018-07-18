@@ -50,4 +50,15 @@ class Init extends ApiMethod
         $this->args['mastercode'] = $masterCode;
         return $this;
     }
+
+    /**
+     * Set the timezone for this init call
+     * @param  string $tz Time zone name of the lock (as per the TZ database)
+     * @return this       Allow method chaining
+     */
+    public function timezone($tz)
+    {
+        $this->args['timezone'] = $tz;
+        return $this;
+    }
 }

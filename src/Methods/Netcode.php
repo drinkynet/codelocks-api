@@ -12,6 +12,8 @@ class Netcode extends ApiMethod
      */
     private $start;
 
+    private $result;
+
     /**
      * Define the required arguments for this method call
      * @var array
@@ -63,8 +65,19 @@ class Netcode extends ApiMethod
      */
     public function get()
     {
-        $result = $this->execute();
-        return isset($result['ActualNetcode']) ? $result['ActualNetcode'] : false;
+        $this->result = null;
+
+        $this->result = $this->execute();
+        return isset($this->result['ActualNetcode']) ? $this->result['ActualNetcode'] : false;
+    }
+
+    /**
+     * Get the full result for the last API request
+     * @return array|null
+     */
+    public function result()
+    {
+        return $this->result;
     }
 
     /**
@@ -210,7 +223,7 @@ class Netcode extends ApiMethod
                 $d = 17;
                 break;
 
-            // 8 days
+            // 7 days
             default:
                 $d = 18;
                 break;

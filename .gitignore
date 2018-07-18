@@ -13,3 +13,7 @@ composer.lock
 #
 test.sh
 index.php
+
+#
+# Exclude log files
+*.log

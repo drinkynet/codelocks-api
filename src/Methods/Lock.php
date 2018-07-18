@@ -9,45 +9,10 @@ namespace drinkynet\Codelocks\Methods;
 
 use drinkynet\Codelocks\Codelocks as Codelocks;
 
-class Lock extends ApiMethod
+class Lock extends K3connect
 {
-    protected $method = 'lock';
-
-    /**
-     * Define the required arguments for this method call
-     * @var array
-     */
-    protected $requiredArgs = ['accesskey'];
-
-    /**
-     * Allow setting of the access key on the construction call
-     * @param  Codelocks $api
-     * @param  string    $accessKey
-     */
-    public function __construct(Codelocks $api, $accesskey = null)
-    {
-        $this->api = $api;
-        $this->accesskey($accesskey);
-    }
-
-    public function get()
-    {
-        $result = $this->execute();
-        return $result;
-    }
-
-    /**
-     * Parameter config functions
-     */
-
-    /**
-     * Set the access key
-     * @param  string $accesskey [description]
-     * @return this              Allow method chaining
-     */
-    public function accesskey($accesskey)
-    {
-        $this->args['accesskey'] = $accesskey;
-        return $this;
-    }
+    // The lock method has been renamed to k3connect in the version 5 API
+    // lock functions have moved to the K3connect method class. This class
+    // extends that to maintain backward compatability for things that use
+    // this wrapper. It may be removed in a future version.
 }
