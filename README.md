@@ -1,7 +1,7 @@
 Codelocks API
 =============
 
-Lightweight PHP wrapper for the Codelocks Netcode API version 4.
+Lightweight PHP wrapper for the Codelocks Netcode API version 5.
 
 Installing
 ----------
@@ -73,5 +73,7 @@ $locks $codelocks->lock('abcde12345')->get();
 
 Previous version
 ----------------
+
+If you are using the version 4 API install the 2.0.1 version of this wrapper via composer.
 
 If you are using the version 3 API install the 1.0.1 version of this wrapper via composer.
