@@ -42,10 +42,18 @@ class NetcodeTest extends \PHPUnit_Framework_TestCase
 
         $codelocks = new Codelocks($key, $accessKey);
 
+        $netcode = $codelocks->netcode($lock);
+
+        // Check that the result is empty
+        $this->assertTrue(is_null($netcode->result()));
+
         // Get a netcode valid now for the specified lock
-        $code = $codelocks->netcode($lock)->get();
+        $code = $netcode->get();
 
         // Netcodes should be a string 6 characters in length
         $this->assertEquals(strlen($code), 6);
+
+        // Check that the result method now returns an array
+        $this->assertTrue(is_array($netcode->result()));
     }
 }

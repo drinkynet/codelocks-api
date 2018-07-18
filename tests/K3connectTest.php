@@ -1,16 +1,13 @@
 <?php
 /**
  * Test the lock method
- *
- * This is a clone of the K3connectTest class because the Lock method
- * class extends it for backward compatability reasons
  */
 
 namespace drinkynet\Codelocks\Tests;
 
 use \drinkynet\Codelocks\Codelocks;
 
-class LockTest extends \PHPUnit_Framework_TestCase
+class K3connectTest extends \PHPUnit_Framework_TestCase
 {
     public function setup()
     {
@@ -45,7 +42,7 @@ class LockTest extends \PHPUnit_Framework_TestCase
 
         $codelocks = new Codelocks($key, $accessKey);
 
-        $lock = $codelocks->lock()->lockId($lockId)->get();
+        $lock = $codelocks->k3connect()->lockId($lockId)->get();
 
         $this->assertTrue(is_array($lock));
         $this->assertEquals($lock['LockId'], $lockId);
@@ -93,7 +90,7 @@ class LockTest extends \PHPUnit_Framework_TestCase
 
         $codelocks = new Codelocks($key, $accessKey);
 
-        $locks = $codelocks->lock()->get();
+        $locks = $codelocks->k3connect()->get();
 
         // If there are no locks returned by the API $locks should be exactly false
         // otherwise the $locks should be an array

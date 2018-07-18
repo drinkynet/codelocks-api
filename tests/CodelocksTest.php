@@ -94,6 +94,26 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Init', $init);
     }
 
+    public function testK3connectInstantiation()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $lock = $codelocks->k3connect();
+
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\K3connect', $lock);
+    }
+
     public function testLockInstantiation()
     {
         $key = getenv('CODELOCKS_API_KEY');
@@ -112,5 +132,45 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
         $lock = $codelocks->lock();
 
         $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Lock', $lock);
+    }
+
+    public function testDurationInstantiation()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $lock = $codelocks->duration();
+
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Duration', $lock);
+    }
+
+    public function testDurationsInstantiation()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $lock = $codelocks->durations();
+
+        $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Durations', $lock);
     }
 }
