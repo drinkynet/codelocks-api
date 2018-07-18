@@ -1,6 +1,6 @@
 {
     "name": "drinkynet/codelocks-api",
-    "description": "Basic wrapper for the Codelocks Netcode API v3",
+    "description": "Basic wrapper for the Codelocks Netcode API",
     "license": "MIT",
     "homepage": "https://github.com/drinkynet/codelocks-api/",
     "authors": [
