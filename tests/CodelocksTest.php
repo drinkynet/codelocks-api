@@ -174,4 +174,29 @@ class CodelocksTest extends TestCase
 
         $this->assertInstanceOf('\drinkynet\Codelocks\Methods\Durations', $lock);
     }
+
+    public function testEndpointSetAndGet()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        $testPath = 'https://example.com/api/';
+        $expectedPath = 'https://example.com/api'; // The set method should trim the trailing slash
+
+        $codelocks->setEndpoint($testPath);
+
+        $path = $codelocks->getEndpoint();
+
+        $this->assertEquals($expectedPath, $path);
+    }
 }

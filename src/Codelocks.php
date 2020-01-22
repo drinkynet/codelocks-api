@@ -76,6 +76,30 @@ class Codelocks
     }
 
     /**
+     * Get the current endpoint address
+     *
+     * @return string
+     */
+    public function getEndpoint()
+    {
+        return $this->endpoint;
+    }
+
+    /**
+     * Overwrite the default endpoint address
+     *
+     * @param string $endpoint
+     *
+     * @return void
+     */
+    public function setEndpoint($endpoint)
+    {
+        if (!is_null($endpoint)) {
+            $this->endpoint = rtrim($endpoint, '/');
+        }
+    }
+
+    /**
      * Make a request to the API
      *
      * @param  strng         $method  The method to request
