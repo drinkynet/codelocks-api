@@ -1,7 +1,7 @@
 Codelocks API
 =============
 
-Lightweight PHP wrapper for the Codelocks Netcode API version 5.
+Lightweight PHP wrapper for the Codelocks Customer API.
 
 Installing
 ----------
