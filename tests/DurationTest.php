@@ -5,9 +5,10 @@
 
 namespace drinkynet\Codelocks\Tests;
 
-use \drinkynet\Codelocks\Codelocks;
+use PHPUnit\Framework\TestCase;
+use drinkynet\Codelocks\Codelocks;
 
-class DurationTest extends \PHPUnit_Framework_TestCase
+class DurationTest extends TestCase
 {
     public function setup()
     {

@@ -5,9 +5,10 @@
 
 namespace drinkynet\Codelocks\Tests;
 
-use \drinkynet\Codelocks\Codelocks;
+use PHPUnit\Framework\TestCase;
+use drinkynet\Codelocks\Codelocks;
 
-class NetcodeTest extends \PHPUnit_Framework_TestCase
+class NetcodeTest extends TestCase
 {
     public function setup()
     {

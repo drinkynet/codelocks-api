@@ -2,9 +2,10 @@
 
 namespace drinkynet\Codelocks\Tests;
 
-use \drinkynet\Codelocks\Codelocks;
+use PHPUnit\Framework\TestCase;
+use drinkynet\Codelocks\Codelocks;
 
-class CodelocksTest extends \PHPUnit_Framework_TestCase
+class CodelocksTest extends TestCase
 {
     public function setup()
     {
@@ -21,13 +22,13 @@ class CodelocksTest extends \PHPUnit_Framework_TestCase
 
     public function testBadAPIKey()
     {
-        $this->setExpectedException('\Exception');
+        $this->expectException(\Exception::class);
         $codelocks = new Codelocks('a-1', 'aaaaaaaaa0');
     }
 
     public function testBadAccessKey()
     {
-        $this->setExpectedException('\Exception');
+        $this->expectException(\Exception::class);
         $codelocks = new Codelocks('0000000000000000000000000000000000000000', '--');
     }
 

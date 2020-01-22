@@ -8,9 +8,10 @@
 
 namespace drinkynet\Codelocks\Tests;
 
-use \drinkynet\Codelocks\Codelocks;
+use PHPUnit\Framework\TestCase;
+use drinkynet\Codelocks\Codelocks;
 
-class LockTest extends \PHPUnit_Framework_TestCase
+class LockTest extends TestCase
 {
     public function setup()
     {

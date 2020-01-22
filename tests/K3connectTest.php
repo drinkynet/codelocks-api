@@ -5,9 +5,10 @@
 
 namespace drinkynet\Codelocks\Tests;
 
+use PHPUnit\Framework\TestCase;
 use \drinkynet\Codelocks\Codelocks;
 
-class K3connectTest extends \PHPUnit_Framework_TestCase
+class K3connectTest extends TestCase
 {
     public function setup()
     {
