@@ -49,7 +49,6 @@ class InitTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('InitSeqFormatDesc', $init);
         $this->assertArrayHasKey('InitSeq', $init);
         $this->assertArrayHasKey('TimeCode', $init);
-
     }
 
     public function testGetInitSequenceWithMasterCode()

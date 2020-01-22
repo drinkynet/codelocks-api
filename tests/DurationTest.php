@@ -70,8 +70,5 @@ class DurationTest extends \PHPUnit_Framework_TestCase
         // Check that the returned data matches the request
         $this->assertEquals($result['DurationID'], $durationId);
         $this->assertEquals($result['LockModel'], $LockModel);
-
-
-
     }
 }
