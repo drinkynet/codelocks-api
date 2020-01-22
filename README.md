@@ -71,8 +71,10 @@ $locks = $codelocks->lock()->get();
 $locks $codelocks->lock('abcde12345')->get();
 ```
 
-Previous version
-----------------
+Previous versions
+-----------------
+
+If you are using the version 5 API install the 5.0.1 version of this wrapper via composer.
 
 If you are using the version 4 API install the 2.0.1 version of this wrapper via composer.
 
