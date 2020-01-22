@@ -23,7 +23,7 @@ class Codelocks
      *
      * @var string
      */
-    private $endpoint = 'https://api-eu.codelocks.io/v5';
+    private $endpoint = 'https://api-customer.codelocks.io/v1';
 
     /**
      * Validate the server certificate
