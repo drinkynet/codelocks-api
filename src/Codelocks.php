@@ -173,10 +173,10 @@ class Codelocks
     {
         switch ($type) {
             case 'netcode':
-                $this->netcodeEndpointPrefix = $prefix;
+                $this->endpointNetcodePrefix = $prefix;
                 break;
             case 'utility':
-                $this->utilityEndpointPrefix = $prefix;
+                $this->endpointUtilityPrefix = $prefix;
                 break;
         }
 
