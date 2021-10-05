@@ -90,13 +90,14 @@ class Codelocks
      *
      * @param string $endpoint
      *
-     * @return void
+     * @return $this           Allow method chaining
      */
     public function setEndpoint($endpoint)
     {
         if (!is_null($endpoint)) {
             $this->endpoint = rtrim($endpoint, '/');
         }
+        return $this;
     }
 
     /**
