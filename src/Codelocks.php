@@ -115,7 +115,7 @@ class Codelocks
     {
         // If cURL isn't available throw an exception
         if (!function_exists('curl_init') || !function_exists('curl_setopt')) {
-            throw new Exception("cURL functions are required but could not be found.");
+            throw new \Exception("cURL functions are required but could not be found.");
         }
 
         $url = $this->endpoint . '/' . $method;
