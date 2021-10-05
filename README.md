@@ -1,10 +1,12 @@
-Codelocks API
-=============
+#Codelocks API Wrapper
 
-Lightweight PHP wrapper for the Codelocks Customer API.
 
-Installing
-----------
+Lightweight PHP wrapper for the [Codelocks Connect API](https://www.codelocksconnect.net/api-documentation).
+
+---
+
+##Installing
+
 
 Install via composer:
 
@@ -12,8 +14,9 @@ Install via composer:
 composer require drinkynet/codelocks-api
 ```
 
-Examples
---------
+---
+
+##Examples
 
 Create an instance of the Codelocks class with your API key and default Access Key
 
@@ -39,7 +42,7 @@ $code = $netcode->lock('0000000000000000000000000000001a')
     ->get();
 ```
 
-Note: You can get the lock ID for each lock from the lock list returned by the ```->lock()``` method call
+**Note:** You can get the lock ID for each lock from the lock list returned by the ```->lock()``` method call
 
 
 Get an initialisation sequence for a lock model:
@@ -71,11 +74,11 @@ $locks = $codelocks->lock()->get();
 $locks $codelocks->lock('abcde12345')->get();
 ```
 
-Previous versions
------------------
+---
 
-If you are using the version 5 API install the 5.0.1 version of this wrapper via composer.
+##Previous versions
 
-If you are using the version 4 API install the 2.0.1 version of this wrapper via composer.
 
-If you are using the version 3 API install the 1.0.1 version of this wrapper via composer.
+If you are using the "Codelocks Customer API" install the 6.0.1 version of this wrapper via composer.
+
+**Note:** API versions prior to this are nolonger avaialable online.
