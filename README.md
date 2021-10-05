@@ -74,4 +74,4 @@ $locks $codelocks->lock('abcde12345')->get();
 
 If you are using the "Codelocks Customer API" install the 6.0.1 version of this wrapper via composer.
 
-**Note:** API versions prior to this are nolonger avaialable online.
+**Note:** API versions prior to this are nolonger available online.
