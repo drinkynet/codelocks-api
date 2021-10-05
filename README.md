@@ -2,7 +2,7 @@
 
 Lightweight PHP wrapper for the [Codelocks Connect API](https://www.codelocksconnect.net/api-documentation).
 
-This wrapper update is aimed at being backwards compatible with the previous version makign it a drop-in replacement to connect to the new API with no breaking changes to method calls or structure.
+This wrapper update is aimed at being backwards compatible with the previous version making it a drop-in replacement to connect to the new API with no breaking changes to method calls or structure.
 
 ## Installing
 
