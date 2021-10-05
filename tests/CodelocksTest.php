@@ -198,5 +198,18 @@ class CodelocksTest extends TestCase
         $path = $codelocks->getEndpoint();
 
         $this->assertEquals($expectedPath, $path);
+
+        // Check prefix setter
+        $expectedPrefix = 'a';
+
+        $codelocks->setEndpointPrefix('netcode', $expectedPrefix);
+        $prefix = $codelocks->getEndpointNetcodePrefix();
+        $this->assertEquals($expectedPrefix, $prefix);
+
+        $expectedPrefix = 'b';
+
+        $codelocks->setEndpointPrefix('utility', $expectedPrefix);
+        $prefix = $codelocks->getEndpointUtilityPrefix();
+        $this->assertEquals($expectedPrefix, $prefix);
     }
 }
