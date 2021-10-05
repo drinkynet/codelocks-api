@@ -131,6 +131,7 @@ class Codelocks
     public function endpointForMethod($method)
     {
         $prefix = '';
+        // Netcode uses its own prefix, all other endpoints are on the utility prefix
         if ('netcode' === substr($method, 0, 7)) {
             $prefix = $this->endpointNetcodePrefix;
         } else {
