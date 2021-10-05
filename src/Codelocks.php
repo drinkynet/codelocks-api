@@ -23,7 +23,28 @@ class Codelocks
      *
      * @var string
      */
-    private $endpoint = 'https://api-customer.codelocks.io/v1';
+    private $endpoint = 'https://api-connect.codelocks.io';
+
+    /**
+     * Store the prefix for netcode endpoints
+     *
+     * @var string
+     */
+    private $endpointNetcodePrefix = 'n';
+
+    /**
+     * Store the prefix for K3Connect endpoints
+     *
+     * @var string
+     */
+    private $endpointUtilityPrefix = 'u';
+
+    /**
+     * Store the endpoint version number prefix
+     *
+     * @var integer
+     */
+    private $endpointVersion = 1;
 
     /**
      * Validate the server certificate
@@ -85,6 +106,46 @@ class Codelocks
         return $this->endpoint;
     }
 
+    public function getEndpointNetcodePrefix()
+    {
+        return $this->endpointNetcodePrefix;
+    }
+
+    public function getEndpointUtilityPrefix()
+    {
+        return $this->endpointUtilityPrefix;
+    }
+
+    public function getEndpointVersion()
+    {
+        return $this->endpointVersion;
+    }
+
+    /**
+     * Get the endpoint for a given method
+     *
+     * @param string $method
+     *
+     * @return string
+     */
+    public function endpointForMethod($method)
+    {
+        $prefix = '';
+        if ('netcode' === substr($method, 0, 7)) {
+            $prefix = $this->endpointNetcodePrefix;
+        } else {
+            $prefix = $this->endpointUtilityPrefix;
+        }
+
+        return sprintf(
+            '%s/%s/%s/%s',
+            $this->endpoint,
+            $prefix,
+            $this->endpointVersion,
+            $method
+        );
+    }
+
     /**
      * Overwrite the default endpoint address
      *
@@ -97,6 +158,41 @@ class Codelocks
         if (!is_null($endpoint)) {
             $this->endpoint = rtrim($endpoint, '/');
         }
+        return $this;
+    }
+
+    /**
+     * Overwrite the default endpoint prefixes
+     *
+     * @param string $type   The endpoint type to set
+     * @param string $prefix The prefix to set
+     *
+     * @return $this         Allow method chaining
+     */
+    public function setEndpointPrefix($type, $prefix)
+    {
+        switch ($type) {
+            case 'netcode':
+                $this->netcodeEndpointPrefix = $prefix;
+                break;
+            case 'utility':
+                $this->utilityEndpointPrefix = $prefix;
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Overwrite the default endpoint version
+     *
+     * @param numeric $version The endpoint version to set
+     *
+     * @return $this           Allow method chaining
+     */
+    public function setEndpointVersion($version)
+    {
+        $this->endpointVersion = $version;
         return $this;
     }
 
@@ -118,7 +214,8 @@ class Codelocks
             throw new \Exception("cURL functions are required but could not be found.");
         }
 
-        $url = $this->endpoint . '/' . $method;
+        //$url = $this->endpoint . '/' . $method;
+        $url = $this->endpointForMethod($method);
 
         // Reset the last error and response
         $this->lastError = null;
