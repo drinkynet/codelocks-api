@@ -2,18 +2,13 @@
 
 Lightweight PHP wrapper for the [Codelocks Connect API](https://www.codelocksconnect.net/api-documentation).
 
----
-
 ## Installing
-
 
 Install via composer:
 
 ```
 composer require drinkynet/codelocks-api
 ```
-
----
 
 ## Examples
 
@@ -73,10 +68,7 @@ $locks = $codelocks->lock()->get();
 $locks $codelocks->lock('abcde12345')->get();
 ```
 
----
-
 ## Previous versions
-
 
 If you are using the "Codelocks Customer API" install the 6.0.1 version of this wrapper via composer.
 
