@@ -211,5 +211,12 @@ class CodelocksTest extends TestCase
         $codelocks->setEndpointPrefix('utility', $expectedPrefix);
         $prefix = $codelocks->getEndpointUtilityPrefix();
         $this->assertEquals($expectedPrefix, $prefix);
+
+        // Check version setter
+        $expectedVersion = random_int(1, 10);
+
+        $codelocks->setEndpointVersion($expectedVersion);
+        $version = $codelocks->getEndpointVersion();
+        $this->assertEquals($expectedVersion, $version);
     }
 }
