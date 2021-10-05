@@ -103,7 +103,7 @@ class Codelocks
     /**
      * Make a request to the API
      *
-     * @param  strng         $method  The method to request
+     * @param  string         $method  The method to request
      * @param  array         $args    An optional array of arguments to pass to
      *                                the method
      * @param  string        $verb    The HTTP verb to use for the request
