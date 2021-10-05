@@ -314,7 +314,7 @@ class Codelocks
      */
     public function k3connect($accessKey = null)
     {
-        $accessKey = is_null($accessKey) ? $this->accessKey : $accesskey;
+        $accessKey = is_null($accessKey) ? $this->accessKey : $accessKey;
         return new Methods\K3connect($this, $this->accessKey);
     }
 
@@ -354,7 +354,7 @@ class Codelocks
      */
     public function lock($accessKey = null)
     {
-        $accessKey = is_null($accessKey) ? $this->accessKey : $accesskey;
+        $accessKey = is_null($accessKey) ? $this->accessKey : $accessKey;
         return new Methods\Lock($this, $this->accessKey);
     }
 }
