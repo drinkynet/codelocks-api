@@ -241,7 +241,7 @@ class Codelocks
             'Content-Type: application/vnd.api+json',
             $authHeader
         ));
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Drinkynet/Codelocks-API/7.0.0 (github.com/drinkynet/codelocks-api)');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Drinkynet/Codelocks-API/7.0 (github.com/drinkynet/codelocks-api)');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->verifySSL);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
