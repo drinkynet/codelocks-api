@@ -405,15 +405,16 @@ class Codelocks
      *
      * Returns a list of locks for this set of API credentials and access key
      *
-     * @param  string $accessKey An optional access key associated with this API
-     *                           key (can be set later)
+     * @param  string $accessKey An optional access key to override the original
+     *                           (can be set later)
+     *
      * @return Methods\K3connect An instance of a lock object with the API
      *                           already injected
      */
     public function k3connect($accessKey = null)
     {
         $accessKey = is_null($accessKey) ? $this->accessKey : $accessKey;
-        return new Methods\K3connect($this, $this->accessKey);
+        return new Methods\K3connect($this, $accessKey);
     }
 
     /**
@@ -445,14 +446,15 @@ class Codelocks
      *
      * Returns a list of locks for this set of API credentials and access key
      *
-     * @param  string $accessKey An optional access key associated with this API
-     *                           key (can be set later)
+     * @param  string $accessKey An optional access key to override the original
+     *                           (can be set later)
+     *
      * @return Methods\Lock      An instance of a lock object with the API
      *                           already injected
      */
     public function lock($accessKey = null)
     {
         $accessKey = is_null($accessKey) ? $this->accessKey : $accessKey;
-        return new Methods\Lock($this, $this->accessKey);
+        return new Methods\Lock($this, $accessKey);
     }
 }
