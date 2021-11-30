@@ -23,6 +23,32 @@ class K3connectTest extends TestCase
         }
     }
 
+    public function testAccount()
+    {
+        $key = getenv('CODELOCKS_API_KEY');
+        $accessKey = getenv('CODELOCKS_API_ACCESS_KEY');
+
+        if (!$key) {
+            $this->markTestSkipped('No CODELOCKS_API_KEY in ENV');
+        }
+
+        if (!$accessKey) {
+            $this->markTestSkipped('No CODELOCKS_API_ACCESS_KEY in ENV');
+        }
+
+        $codelocks = new Codelocks($key, $accessKey);
+
+        // Test valid account
+        $account = $codelocks->k3connect()->account();
+        $this->assertTrue(is_array($account), 'Account result is an array');
+        $this->assertArrayHasKey('email', $account, 'Account has an email key');
+        $this->assertArrayHasKey('spccmstatus', $account, 'Account has an spccmstatus key');
+
+        // Test invalid account
+        $account = $codelocks->k3connect('nonsense')->account();
+        $this->assertEquals(false, $account, 'Invalid accesskey response matches the expected error');
+    }
+
     public function testGetLock()
     {
         $key = getenv('CODELOCKS_API_KEY');

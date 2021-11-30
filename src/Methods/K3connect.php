@@ -31,6 +31,20 @@ class K3connect extends ApiMethod
     }
 
     /**
+     * Get the account info for a K3Connect account
+     *
+     * @return Object|string This method call will return an account object
+     *                       or in the case of an invalid access key the
+     *                       string: "Invalid accesskey"
+     */
+    public function account()
+    {
+        $this->method = 'k3connect/account';
+        $result = $this->execute();
+        return $result;
+    }
+
+    /**
      * Get a list of locks
      * @param  string $lockId Optional lock ID to return just a single lock
      * @return Object         Result object
